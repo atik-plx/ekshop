@@ -1,0 +1,35 @@
+{
+  "name": "System Flasher 4",
+  "category":"partner new category",
+  "brand":"partner brand",
+  "model":"",
+  "keywords": ["Mobile", "Phone", "Turing", "AI Phone"],
+  "highlights":"Product highlights will be here",
+  "product_description": "Turing T99 EN : product description will be here. In detail with some image",
+  "video_url": "https://www.youtube.com/watch?v=h7C6yGgWVX4",
+  "images": [],
+  "attributes": [{"attribute_name": "Color",	"data": [{"val": "Black"}, {"val": "Blue"},	{"val": "White"}]}, {"attribute_name": "Memory", "data": [{"val": "4GB"}, {"val": "6GB"}, {"val": "8GB"}]}],
+  "sku_information": [
+    {
+      "is_enabled": true, "is_default": true,	"attr_combo": ["Black","4GB"], "sku": "SKU-12549", "quantity": 10, "price": 12499.99, "special_price": 12499.99,
+      "images": [
+        {
+          "actual_img": "https://picsum.photos/480",
+          "mid_img": "https://picsum.photos/480",
+          "thumb_img": "https://picsum.photos/480"
+        },
+        {
+          "actual_img": "https://picsum.photos/480",
+          "mid_img": "https://picsum.photos/480",
+          "thumb_img": "https://picsum.photos/480"
+        }
+      ]
+    },
+    {"is_enabled": true, "is_default": false, "attr_combo": ["Black","6GB"], "sku": "SKU-12549", "quantity": 5,	"price": 15999.99, "special_price": 15000 }
+  ],
+  "faq": [
+    {"question": "Question 1", "answer": "Answer for 1"},
+    {"question": "Question 2", "answer": "Answer for 2"},
+    {"question": "Question 3", "answer": "Answer for 3"}
+  ]
+}

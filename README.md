@@ -17,13 +17,8 @@ PSRs you support to avoid any confusion with users and contributors.
 If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
 
 ```
-bin/        
-build/
-docs/
-config/
 src/
 tests/
-vendor/
 ```
 
 
@@ -38,8 +33,47 @@ $ composer require ekshop/ekshopSdk
 ## Usage
 
 ``` php
-$skeleton = new ekshop\ekshopSdk();
-echo $skeleton->echoPhrase('Hello, League!');
+/*New Login Credentials*/
+$new_login = array();
+$new_login['login_id'] = "";
+$new_login['password'] = "";
+$new_login['device_id'] = "";
+$new_login['device_token'] = "";
+$new_login['device_type'] = "";
+$new_login['os'] = "";
+
+/*Get Token and save into anywhere for future usage*/
+$new_token = new \ekshop\ekshopSdk\AccessToken($new_login);
+$token = $new_token->getToken();
+
+
+/*Product Add*/
+$json_url = 'http://localhost:8015/ekshopSdkImp/sample-product.json';
+$json_load = file_get_contents($json_url);
+$json_decoded = json_decode($json_load, true);
+
+$product_add = $skeleton->addProduct($json_decoded,$token);
+
+echo '<pre>';
+print_r($product_add);
+echo '</pre>';
+
+
+/*List Product*/
+$filters['page'] = 1;
+$filters['limit'] = 10;
+$filters['search_string'] = '';
+$filters['merchant_type'] = '';
+$filters['store_id'] = '';
+$filters['status'] = '';
+$filters['publish_status'] = '';
+$filters['sort_by_sell'] = '';
+$filters['sort_by_price'] = '';
+
+$product_lists = $skeleton->listProduct($filters,$token);
+echo '<pre>';
+print_r($product_lists);
+echo '</pre>';
 ```
 
 ## Change log
@@ -49,7 +83,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ``` bash
-$ composer test
+$ php tests/ExampleTest.php
 ```
 
 ## Contributing
