@@ -7,10 +7,9 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```Ekshop``` ```ekshop``` ```https://github.com/ekshop``` ```ekshop@ekshop.gov.bd``` ```ekshop``` ```ekshopSdk``` ```Used for merchant product sdk``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
+**Note:** 
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+This is product of ekshop. Collect account from Ekshop team and test the sdk for implementation.
 
 ## Structure
 
@@ -48,7 +47,7 @@ $token = $new_token->getToken();
 
 
 /*Product Add*/
-$json_url = 'http://localhost:8015/ekshopSdkImp/sample-product.json';
+$json_url = 'https://raw.githubusercontent.com/atik-plx/ekshop/master/sample-product.json';
 $json_load = file_get_contents($json_url);
 $json_decoded = json_decode($json_load, true);
 

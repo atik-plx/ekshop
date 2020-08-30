@@ -22,7 +22,7 @@ $token = $new_token->getToken();
 
 
 /*Product Add*/
-$json_url = 'http://localhost:8015/ekshopSdkImp/sample-product.json';
+$json_url = 'https://raw.githubusercontent.com/atik-plx/ekshop/master/sample-product.json';
 $json_load = file_get_contents($json_url);
 $json_decoded = json_decode($json_load, true);
 
