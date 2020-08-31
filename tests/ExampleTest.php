@@ -59,3 +59,48 @@ echo '<pre>';
 print_r($product_add_bulk);
 echo '</pre>';
 
+
+/*[Change Products Status]*/
+$product_reference_ids = ['000000'];
+/*Publish A Product*/
+$publish_product = $skeleton->productPublish($product_reference_ids,$token);
+
+/*Un Publish A Product*/
+$unpublish_product = $skeleton->productUnpublish($product_reference_ids,$token);
+
+/*Draft A Product*/
+$draft_product = $skeleton->productDraft($product_reference_ids,$token);
+
+echo '<pre>';
+print_r($draft_product);
+echo '</pre>';
+
+
+/*Production Deletetion*/
+$product_reference_id = "000000";
+$delete_product = $skeleton->productDelete($product_reference_id,$token);
+echo '<pre>';
+print_r($delete_product);
+echo '</pre>';
+
+
+/*Production Sku Deletetion*/
+$product_reference_id = "000000";
+$sku_id = "SKU-12549";  //get it from sku want to delete .
+$delete_product_sku = $skeleton->productSkuDelete($product_reference_id,$sku_id,$token);
+echo '<pre>';
+print_r($delete_product_sku);
+echo '</pre>';
+
+
+/*Production Sku Deletetion*/
+$payload['quantity']= 15;
+$payload['price']= 555;
+$payload['special_price']= 545;
+$product_reference_id = "000000";
+$sku_id = "SKU-12549";  //get it from sku want to delete .
+$update_product_sku_inventory = $skeleton->productSkuInventoryUpdate($product_reference_id,$sku_id,$payload,$token);
+echo '<pre>';
+print_r($update_product_sku_inventory);
+echo '</pre>';
+

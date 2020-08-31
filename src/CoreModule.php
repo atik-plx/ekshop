@@ -166,7 +166,7 @@ class CoreModule
     }
 
     /**
-     * Login Session
+     * List Product
      *
      * @param string $phrase Phrase to return
      *
@@ -207,6 +207,209 @@ class CoreModule
             }catch (Exception $exception){
                 throw new InvalidArgumentException('Invalid Body');
             }
+
+    }
+
+
+    /**
+     * Product Status
+     *
+     * @param string $phrase Phrase to return
+     *
+     * @return string Returns the phrase passed in
+     */
+    private function statusSwitchProduct(array $body,$token)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config_api_url ."/partner/productPublishStatusMultyUpdate",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => json_encode($body),
+            CURLOPT_HTTPHEADER => array(
+                "x-auth-token: $token",
+                "Content-Type: application/json"
+            ),
+        ));
+
+
+        $response = curl_exec($curl);
+        $response_parsed = json_decode($response);
+        curl_close($curl);
+        try {
+            $status = @$response_parsed->status;
+            if ($status != 1){
+                throw new InvalidArgumentException(@$response_parsed->message);
+            }
+            return $response_parsed;
+
+        }catch (Exception $exception){
+            throw new InvalidArgumentException('Invalid Body');
+        }
+
+
+    }
+
+    /*For Publishing Multiple Products By Reference ID*/
+    public function productPublish(array $ids,$token){
+        $body['publish_status'] = 2;
+        $body['ids'] = $ids;
+        return $this->statusSwitchProduct($body,$token);
+    }
+
+    /*For Un Publishing Multiple Products By Reference ID*/
+    public function productUnpublish(array $ids,$token){
+        $body['publish_status'] = 3;
+        $body['ids'] = $ids;
+        return $this->statusSwitchProduct($body,$token);
+    }
+
+    /*For Un Publishing Multiple Products By Reference ID*/
+    public function productDraft(array $ids,$token){
+        $body['publish_status'] = 1;
+        $body['ids'] = $ids;
+        return $this->statusSwitchProduct($body,$token);
+    }
+
+
+    /**
+     * Product Delete
+     *
+     * @param string $phrase Phrase to return
+     *
+     * @return string Returns the phrase passed in
+     */
+    public function productDelete(string $id,$token)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config_api_url ."/partner/deleteProduct/$id",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "DELETE",
+            CURLOPT_HTTPHEADER => array(
+                "x-auth-token: $token",
+            ),
+        ));
+
+
+
+        $response = curl_exec($curl);
+        $response_parsed = json_decode($response);
+        curl_close($curl);
+        try {
+            $status = @$response_parsed->status;
+            if ($status != 1){
+                throw new InvalidArgumentException(@$response_parsed->message);
+            }
+            return $response_parsed;
+
+        }catch (Exception $exception){
+            throw new InvalidArgumentException('Invalid Body');
+        }
+
+
+    }
+
+    /**
+     * Product Sku Delete
+     *
+     * @param string $phrase Phrase to return
+     *
+     * @return string Returns the phrase passed in
+     */
+    public function productSkuDelete(string $id,string  $sku_code ,$token)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config_api_url."/partner/$id/delete-sku-item/$sku_code",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "DELETE",
+            CURLOPT_HTTPHEADER => array(
+                "x-auth-token: $token"
+            ),
+        ));
+
+
+        $response = curl_exec($curl);
+        $response_parsed = json_decode($response);
+        curl_close($curl);
+        try {
+            $status = @$response_parsed->status;
+            if ($status != 1){
+                throw new InvalidArgumentException(@$response_parsed->message);
+            }
+            return $response_parsed;
+
+        }catch (Exception $exception){
+            throw new InvalidArgumentException('Invalid Body');
+        }
+
+
+    }
+
+    /**
+     * Product Sku Update
+     *
+     * @param string $phrase Phrase to return
+     *
+     * @return string Returns the phrase passed in
+     */
+    public function productSkuInventoryUpdate(string $id,string  $sku_code ,array $payload,$token)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config_api_url."/partner/$id/updateProductInventory/$sku_code",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => array(
+                "x-auth-token: $token",
+                "Content-Type: application/json"
+            ),
+        ));
+
+
+        $response = curl_exec($curl);
+        $response_parsed = json_decode($response);
+        curl_close($curl);
+        try {
+            $status = @$response_parsed->status;
+            if ($status != 1){
+                throw new InvalidArgumentException(@$response_parsed->message);
+            }
+            return $response_parsed;
+
+        }catch (Exception $exception){
+            throw new InvalidArgumentException('Invalid Body');
+        }
 
 
     }
