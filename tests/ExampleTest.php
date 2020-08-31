@@ -22,7 +22,7 @@ $token = $new_token->getToken();
 
 
 /*Product Add*/
-$json_url = 'https://raw.githubusercontent.com/atik-plx/ekshop/master/sample-product.json';
+$json_url = 'http://localhost:8015/ekshopSdkImp/sample-product.json';
 $json_load = file_get_contents($json_url);
 $json_decoded = json_decode($json_load, true);
 
@@ -48,5 +48,14 @@ $filters['sort_by_price'] = '';
 $product_lists = $skeleton->listProduct($filters,$token);
 echo '<pre>';
 print_r($product_lists);
+echo '</pre>';
+
+
+/*Product Add Bulk*/
+$file_path = dirname(__DIR__,1).'/partner-bulk-product-sample.csv';
+$product_add_bulk = $skeleton->addProductBulk($file_path,$token);
+
+echo '<pre>';
+print_r($product_add_bulk);
 echo '</pre>';
 

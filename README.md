@@ -9,7 +9,7 @@
 
 **Note:** 
 
-This is product of ekshop. Collect account from Ekshop team and test the sdk for implementation.
+This is a product of ekshop. Collect account from Ekshop team and test the sdk for implementation.
 
 ## Structure
 
@@ -72,6 +72,15 @@ $filters['sort_by_price'] = '';
 $product_lists = $skeleton->listProduct($filters,$token);
 echo '<pre>';
 print_r($product_lists);
+echo '</pre>';
+
+
+/*Product Add Bulk*/
+$file_path = dirname(__DIR__,1).'/partner-bulk-product-sample.csv';
+$product_add_bulk = $skeleton->addProductBulk($file_path,$token);
+
+echo '<pre>';
+print_r($product_add_bulk);
 echo '</pre>';
 ```
 

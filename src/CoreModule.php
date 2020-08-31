@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace ekshop\ekshopSdk;
+use CURLFile;
 use InvalidArgumentException;
 use mysql_xdevapi\Exception;
 
@@ -115,6 +116,54 @@ class CoreModule
         return  true;
     }
 
+
+    /**
+     * Add Proudct
+     *
+     * @param string $phrase Phrase to return
+     *
+     * @return string Returns the phrase passed in
+     */
+    public function addProductBulk($file,$token)
+    {
+
+        $curl = curl_init();
+        $filePath = curl_file_create($file);
+
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config_api_url."/partner/importProduct",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array('file'=> $filePath),
+            CURLOPT_HTTPHEADER => array(
+                "x-auth-token: $token"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        $response_parsed = json_decode(@$response);
+        curl_close($curl);
+
+            try {
+                $status = @$response_parsed->status;
+                if ($status != 1) {
+                    throw new InvalidArgumentException(@$response_parsed->message);
+                }
+                return $response_parsed->message;
+
+            } catch (Exception $exception) {
+                throw new InvalidArgumentException('Invalid Body');
+            }
+
+
+    }
 
     /**
      * Login Session
