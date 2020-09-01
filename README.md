@@ -26,7 +26,7 @@ tests/
 Via Composer
 
 ``` bash
-$ composer require ekshop/ekshopSdk
+$ composer require ekshop/ekshopSdk --ignore-platform-reqs
 ```
 
 ## Usage
