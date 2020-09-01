@@ -105,9 +105,7 @@ class CoreModule
             throw new InvalidArgumentException('Required option not passed: "product_description"');
         }
 
-        if (empty($variables['attributes'])) {
-            throw new InvalidArgumentException('Required option not passed: "attributes"');
-        }
+     
 
         if (empty($variables['sku_information'])) {
             throw new InvalidArgumentException('Required option not passed: "sku_information"');
