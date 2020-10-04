@@ -45,6 +45,9 @@ $new_login['os'] = "";
 $new_token = new \ekshop\ekshopSdk\AccessToken($new_login);
 $token = $new_token->getToken();
 
+/*Core Model*/
+$skeleton = new \ekshop\ekshopSdk\CoreModule();
+
 
 /*Product Add*/
 $json_url = 'https://raw.githubusercontent.com/atik-plx/ekshop/master/sample-product.json';
