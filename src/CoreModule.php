@@ -71,7 +71,7 @@ class CoreModule
                 if ($status != 1){
                     throw new InvalidArgumentException(@$response_parsed->message);
                 }
-                return $response_parsed->product;
+                return $response_parsed->product_reference_ids;
 
             }catch (Exception $exception){
                 throw new InvalidArgumentException('Invalid Body');
