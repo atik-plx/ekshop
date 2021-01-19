@@ -68,10 +68,10 @@ class CoreModule
             curl_close($curl);
             try {
                 $status = @$response_parsed->status;
-                if ($status != 1){
-                    throw new InvalidArgumentException(@$response_parsed->message);
+                if ($status != 1 || count($response_parsed->invalid_products) > 0){
+                    throw new InvalidArgumentException(@$response_parsed->invalid_products[0]->message);
                 }
-                return $response_parsed->product_reference_ids;
+                return $response_parsed;
 
             }catch (Exception $exception){
                 throw new InvalidArgumentException('Invalid Body');
